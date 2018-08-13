@@ -1,7 +1,7 @@
 # Exercises
 
 - [x] Extend the calculator to handle multiplication of two integers
-- [ ] Extend the calculator to handle division of two integers
+- [x] Extend the calculator to handle division of two integers
 - [ ] Modify the code to interpret expressions containing an arbitrary number of additions and subtractions, for example “9 - 5 + 3 + 11”
 Check your understanding.
 

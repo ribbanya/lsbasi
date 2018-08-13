@@ -1,7 +1,7 @@
 # Token types
 # EOF (end-of-file) token is used to indicate that
 # there is no more input left for lexical analysis
-INTEGER, PLUS, MINUS, MULTIPLY, EOF = 'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'EOF'
+INTEGER, PLUS, MINUS, MULTIPLY, DIVIDE, EOF = 'INTEGER', 'PLUS', 'MINUS', 'MULTIPLY', 'DIVIDE', 'EOF'
 
 
 class Token(object):
@@ -87,6 +87,10 @@ class Interpreter(object):
                 self.advance()
                 return Token(MULTIPLY, '*')
 
+            if self.current_char == '/':
+                self.advance()
+                return Token(DIVIDE, '/')
+
             self.error()
 
         return Token(EOF, None)
@@ -122,6 +126,8 @@ class Interpreter(object):
             self.eat(MINUS)
         elif op.type is MULTIPLY:
             self.eat(MULTIPLY)
+        elif op.type is DIVIDE:
+            self.eat(DIVIDE)
         else:
             self.error()
 
@@ -142,6 +148,8 @@ class Interpreter(object):
             result = left.value - right.value
         elif op.type is MULTIPLY:
             result = left.value * right.value
+        elif op.type is DIVIDE:
+            result = left.value / right.value
         return result
 
 
