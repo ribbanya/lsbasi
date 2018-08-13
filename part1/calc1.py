@@ -54,6 +54,8 @@ class Interpreter(object):
         if self.pos > len(text) - 1:
             return Token(EOF, None)
 
+        self.skip_whitespace()
+
         # get a character at the position self.pos and decide
         # what token to create based on the single character
         current_char = text[self.pos]
@@ -73,6 +75,13 @@ class Interpreter(object):
             return token
 
         self.error()
+
+    def skip_whitespace(self):
+        while True:
+            if self.text[self.pos].isspace():
+                self.pos += 1
+            else:
+                return
 
     def eat(self, token_type):
         # compare the current token type with the passed token
