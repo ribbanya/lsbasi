@@ -35,6 +35,10 @@ class Interpreter(object):
         self.pos = 0
         # current token instance
         self.current_token = None
+        self.left = None
+        self.op = None
+        self.right = None
+        self.result = 0
         self.current_char = self.text[self.pos]
 
     def error(self):
@@ -105,52 +109,53 @@ class Interpreter(object):
         else:
             self.error()
 
+    def operate(self):
+        result = None
+        if self.op is PLUS:
+            result = self.left + self.right
+        elif self.op is MINUS:
+            result = self.left - self.right
+        elif self.op is MULTIPLY:
+            result = self.left * self.right
+        elif self.op is DIVIDE:
+            result = self.left / self.right
+        else:
+            self.error()
+        self.left = 0 if self.op in {PLUS, MINUS} else None
+        self.op = None
+        self.right = None
+
+        return result
+
     def expr(self):
         """Parser / Interpreter
 
         expr -> INTEGER PLUS INTEGER
         expr -> INTEGER MINUS INTEGER
         """
+
         # set current token to the first token taken from the input
         self.current_token = self.get_next_token()
+        while True:
 
-        # we expect the current token to be an integer
-        left = self.current_token
-        self.eat(INTEGER)
+            if self.current_token.type is EOF:
+                return self.result
 
-        # we expect the current token to be either a '+' or '-'
-        op = self.current_token
-        if op.type is PLUS:
-            self.eat(PLUS)
-        elif op.type is MINUS:
-            self.eat(MINUS)
-        elif op.type is MULTIPLY:
-            self.eat(MULTIPLY)
-        elif op.type is DIVIDE:
-            self.eat(DIVIDE)
-        else:
+            if self.current_token.type is INTEGER:
+                if self.left is None:
+                    self.left = self.current_token.value
+                else:
+                    self.right = self.current_token.value
+                    self.result += self.operate()
+                self.eat(INTEGER)
+                continue
+
+            if self.current_token.type in {PLUS, MINUS, MULTIPLY, DIVIDE}:
+                self.op = self.current_token.type
+                self.eat(self.op)
+                continue
+
             self.error()
-
-        # we expect the current token to be an integer
-        right = self.current_token
-        self.eat(INTEGER)
-        # after the above call the self.current_token is set to
-        # EOF token
-
-        # at this point either the INTEGER PLUS INTEGER or
-        # the INTEGER MINUS INTEGER sequence of tokens
-        # has been successfully found and the method can just
-        # return the result of adding or subtracting two integers,
-        # thus effectively interpreting client input
-        if op.type is PLUS:
-            result = left.value + right.value
-        elif op.type is MINUS:
-            result = left.value - right.value
-        elif op.type is MULTIPLY:
-            result = left.value * right.value
-        elif op.type is DIVIDE:
-            result = left.value / right.value
-        return result
 
 
 def main():
