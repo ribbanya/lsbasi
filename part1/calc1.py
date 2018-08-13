@@ -79,10 +79,20 @@ class Interpreter(object):
         # type and if they match then "eat" the current token
         # and assign the next token to the self.current_token,
         # otherwise raise an exception.
-        if self.current_token.type == token_type:
+        if self.current_token.type is token_type:
             self.current_token = self.get_next_token()
         else:
             self.error()
+
+    def eat_integer(self):
+        head = None
+        while self.current_token.type is INTEGER:
+            if head is None:
+                head = self.current_token
+            else:
+                head.value = head.value * 10 + self.current_token.value
+            self.eat(INTEGER)
+        return head
 
     def expr(self):
         """expr -> INTEGER PLUS INTEGER"""
@@ -90,16 +100,13 @@ class Interpreter(object):
         self.current_token = self.get_next_token()
 
         # we expect the current token to be a single-digit integer
-        left = self.current_token
-        self.eat(INTEGER)
+        left = self.eat_integer()
 
         # we expect the current token to be a '+' token
-        op = self.current_token
         self.eat(PLUS)
 
         # we expect the current token to be a single-digit integer
-        right = self.current_token
-        self.eat(INTEGER)
+        right = self.eat_integer()
         # after the above call the self.current_token is set to
         # EOF token
 
