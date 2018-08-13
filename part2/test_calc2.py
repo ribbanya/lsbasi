@@ -91,6 +91,21 @@ class CalcTestCase(unittest.TestCase):
         result = interpreter.expr()
         self.assertEqual(result, 20)
 
+    def test_interpreter_multiplication(self):
+        interpreter = self.makeInterpreter(' 27 * 3  ')
+        result = interpreter.expr()
+        self.assertEqual(result, 81)
+
+    def test_interpreter_division(self):
+        interpreter = self.makeInterpreter(' 96        /   12  ')
+        result = interpreter.expr()
+        self.assertEqual(result, 8)
+
+    def test_interpreter_chaining(self):
+        interpreter = self.makeInterpreter(' 27   -  7   + 23 + 7  ')
+        result = interpreter.expr()
+        self.assertEqual(result, 50)
+
 
 if __name__ == '__main__':
     unittest.main()
