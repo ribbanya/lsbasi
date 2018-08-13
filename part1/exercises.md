@@ -4,7 +4,7 @@
 - [x] Add a method that skips whitespace characters so that your calculator can handle inputs with whitespace characters like ” 12 + 3”
 - [x] Modify the code and instead of ‘+’ handle ‘-‘ to evaluate subtractions like “7-5”
 
-# Check your understanding
+## Check your understanding.
 
 - What is an interpreter?
   - A translator that processes and executes source code **without** converting it to machine language.
