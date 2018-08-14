@@ -18,10 +18,10 @@ function error(char: string, pos: number) {
   return Error(`Lexical error at position ${pos}: '${char}'.`);
 }
 
-export function lex(input: string): LexedExpression {
-  const output: Token[] = [];
+export function lex(text: string): LexedExpression {
+  const lexed: Token[] = [];
   let last: Token | null = null;
-  [...input].forEach((char: string, pos: number) => {
+  [...text].forEach((char: string, pos: number) => {
     if (char.match(/\s/)) {
       last = null;
       return;
@@ -48,9 +48,9 @@ export function lex(input: string): LexedExpression {
         type,
         value: char,
       };
-      output.push(current);
+      lexed.push(current);
     }
     last = current;
   });
-  return { input, output };
+  return { text, lexed };
 }
