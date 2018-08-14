@@ -14,8 +14,8 @@ const map: { [key: string]: TokenTypes } = {
   (c) => map[c] = TokenTypes.INTEGER,
 );
 
-function error(position: number) {
-  return Error(`Lexical error at position ${position}.`);
+function error(char: string, pos: number) {
+  return Error(`Lexical error at position ${pos}: '${char}'.`);
 }
 
 export function lex(input: string): LexedExpression {
@@ -24,7 +24,7 @@ export function lex(input: string): LexedExpression {
     if (char.match(/\s/)) return;
 
     const type = map[char];
-    if (!type) throw error(pos);
+    if (!type) throw error(char, pos);
 
     output.push({ type, value: char, position: pos });
   });
