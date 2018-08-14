@@ -7,5 +7,8 @@
 ## Check your understanding.
 
 - What is a syntax diagram?
+  - A diagram representing the symbols of a language and their logical flow.
 - What is syntax analysis?
+  - The recognition of phrases within a stream of tokens.
 - What is a syntax analyzer?
+  - The part of code that performs syntax analysis.
