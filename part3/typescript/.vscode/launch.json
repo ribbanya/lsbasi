@@ -13,6 +13,7 @@
     ],
     "args": [
       "${workspaceFolder}/src/main.ts"
-    ]
+    ],
+    "console": "integratedTerminal"
   }]
 }
