@@ -52,5 +52,11 @@ export function lex(text: string): LexedExpression {
     }
     last = current;
   });
+  lexed.push({
+    length: 0,
+    position: text.length,
+    type: TokenTypes.EOF,
+    value: '\0',
+  });
   return { text, lexed };
 }

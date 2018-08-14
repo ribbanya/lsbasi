@@ -1,5 +1,5 @@
 export const enum TokenTypes {
-  NONE,
+  EOF,
   INTEGER,
   ADD,
   SUBTRACT,

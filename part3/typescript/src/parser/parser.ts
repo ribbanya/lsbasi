@@ -30,7 +30,6 @@ export function parse(lexed: LexedExpression): ParsedExpression {
       throw error();
     }
     last = token;
-    return;
   });
   return Object.assign({ parsed }, lexed);
 }
