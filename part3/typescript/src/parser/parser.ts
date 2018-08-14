@@ -1,8 +1,8 @@
-import { LexedExpression, Token, TokenTypes } from '../lexer';
+import { EOF, LexedExpression, Token, TokenTypes } from '../lexer';
 import { ParsedExpression } from './parsed-expression.interface';
 
-function error() {
-  return Error('TODO');
+function error(token: Token) {
+  return Error(`Syntax error at position ${token.position}: '${token.value}'.`);
 }
 
 export function parse(lexed: LexedExpression): ParsedExpression {
@@ -27,7 +27,7 @@ export function parse(lexed: LexedExpression): ParsedExpression {
         //   break;
       }
     } else if (!last || last.type !== TokenTypes.INTEGER) {
-      throw error();
+      throw error(last || EOF(0));
     }
     last = token;
   });

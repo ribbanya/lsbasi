@@ -2,6 +2,15 @@ import { LexedExpression } from './lexed-expression.interface';
 import { TokenTypes } from './token-types.enum';
 import { Token } from './token.interface';
 
+export function EOF(position: number): Token {
+  return {
+    length: 0,
+    position,
+    type: TokenTypes.EOF,
+    value: '\0',
+  };
+}
+
 const map: { [key: string]: TokenTypes } = {
   // '*': TokenTypes.MULTIPLY,
   '+': TokenTypes.ADD,
@@ -52,11 +61,6 @@ export function lex(text: string): LexedExpression {
     }
     last = current;
   });
-  lexed.push({
-    length: 0,
-    position: text.length,
-    type: TokenTypes.EOF,
-    value: '\0',
-  });
+  lexed.push(EOF(text.length));
   return { text, lexed };
 }
