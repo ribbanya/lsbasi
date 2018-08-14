@@ -4,4 +4,5 @@ export interface Token {
   type: TokenTypes;
   value: string;
   position: number;
+  length: number;
 }

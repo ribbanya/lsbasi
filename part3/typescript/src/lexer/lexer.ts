@@ -20,13 +20,37 @@ function error(char: string, pos: number) {
 
 export function lex(input: string): LexedExpression {
   const output: Token[] = [];
+  let last: Token | null = null;
   [...input].forEach((char: string, pos: number) => {
-    if (char.match(/\s/)) return;
+    if (char.match(/\s/)) {
+      last = null;
+      return;
+    }
 
     const type = map[char];
+
     if (!type) throw error(char, pos);
 
-    output.push({ type, value: char, position: pos });
+    let current;
+
+    if (
+      type === TokenTypes.INTEGER
+      && last
+      && last.type === TokenTypes.INTEGER
+    ) {
+      current = last;
+      current.value += char;
+      current.length += 1;
+    } else {
+      current = {
+        length: 1,
+        position: pos,
+        type,
+        value: char,
+      };
+      output.push(current);
+    }
+    last = current;
   });
   return { input, output };
 }
