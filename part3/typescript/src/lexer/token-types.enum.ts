@@ -3,6 +3,6 @@ export const enum TokenTypes {
   INTEGER,
   ADD,
   SUBTRACT,
-  MULTIPLY,
-  DIVIDE,
+  // MULTIPLY,
+  // DIVIDE,
 }

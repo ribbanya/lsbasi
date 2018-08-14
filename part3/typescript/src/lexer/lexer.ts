@@ -3,10 +3,10 @@ import { TokenTypes } from './token-types.enum';
 import { Token } from './token.interface';
 
 const map: { [key: string]: TokenTypes } = {
-  '*': TokenTypes.MULTIPLY,
+  // '*': TokenTypes.MULTIPLY,
   '+': TokenTypes.ADD,
   '-': TokenTypes.SUBTRACT,
-  '/': TokenTypes.DIVIDE,
+  // '/': TokenTypes.DIVIDE,
 };
 
 // map[0-9]: TokenTypes.INTEGER
