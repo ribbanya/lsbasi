@@ -21,7 +21,7 @@ function error(char: string, pos: number) {
 export function lex(text: string): LexedExpression {
   const lexed: Token[] = [];
   let last: Token | null = null;
-  [...text].forEach((char: string, pos: number) => {
+  [...text].forEach((char, pos) => {
     if (char.match(/\s/)) {
       last = null;
       return;
