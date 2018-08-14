@@ -12,9 +12,6 @@
         "max-classes-per-file": [true, 1],
         "curly": [true, "ignore-same-line"],
         "no-console": false,
-        "no-unused-variable": [true, {
-            "ignore-pattern": "^_"
-        }],
         "variable-name": [
             true, "ban-keywords", "check-format",
             "allow-leading-underscore"
