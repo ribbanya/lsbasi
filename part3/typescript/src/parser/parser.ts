@@ -1,4 +1,5 @@
-import { EOF, LexedExpression, Token, TokenTypes } from '../lexer';
+import { EOF, LexedExpression } from '../lexer';
+import { Token, TokenTypes } from '../tokens';
 import { ParsedExpression } from './parsed-expression.interface';
 
 function error(token: Token) {

@@ -1,6 +1,5 @@
+import { Token, TokenTypes } from '../tokens';
 import { LexedExpression } from './lexed-expression.interface';
-import { TokenTypes } from './token-types.enum';
-import { Token } from './token.interface';
 
 export function EOF(position: number): Token {
   return {
